@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+int dp[200000];
+ 
+ 
+ll helper(int n ,int nums[],int idx,ll score){
+ 
+    if(idx>=n) return score;
+ 
+    if(dp[idx]!=-1) return dp[idx];
+ 
+    score+=nums[idx];
+ 
+    return dp[idx] = helper(n,nums,idx+nums[idx],score);
+}
+ 
+ll solve(){
+ 
+    int n;
+    cin>>n;
+    int nums[n];
+    for(int i=0 ;i<n ; i++){
+        cin>>nums[i];
+    }
+ 
+    memset(dp,-1,sizeof(dp));
+ 
+    for(int i=0 ; i<n; i++){
+        helper(n,nums,i,0);
+    } 
+    
+    int maxi = INT_MIN;
+ 
+    for(int i=0 ; i<n ;i++){
+        maxi = max(maxi,dp[i]);
+    }
+ 
+    return maxi;
+ 
+}
+ 
+int main(){
+ 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+ 
+    int t;
+    cin>>t;
+    while(t--){
+ 
+        cout<<solve()<<endl;
+ 
+    }
+ 
+    return 0;
+ 
+} 
