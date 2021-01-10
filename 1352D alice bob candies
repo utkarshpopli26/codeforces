@@ -1,0 +1,84 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+
+void solve(){
+    int n;
+    cin>>n;
+
+    vector<int> nums(n,0);
+
+    for(int i=0 ; i<n ;i++)cin>>nums[i];
+
+	if(n==1){
+		cout<<1<<" "<<nums[0]<<" "<<0<<endl;
+		return ;
+	}
+
+	if(n==2){
+		cout<<2<<" "<<nums[0]<<" "<<nums[1]<<endl;
+		return ;
+	}
+
+	int turn = 0;
+
+	int prev_b = 0 , prev_a = 0;
+
+	ll alice = 0 , bob = 0;
+
+	int i=0 , j=n-1;
+
+	int moves = 0;
+
+	while(i<=j){
+
+		if(turn==0){	
+			ll curr_a = 0;
+
+			while(i<=j and curr_a<=prev_b){
+				curr_a+=nums[i];
+				alice+=nums[i];
+				i++;
+			}
+
+			turn = 1;
+			prev_a = curr_a;
+		}
+		else{
+			ll curr_b = 0;
+			while(i<=j and curr_b<=prev_a){
+				curr_b+=nums[j];
+				bob+=nums[j];
+				j--;
+			}
+			turn = 0;
+			prev_b = curr_b;
+		}
+
+		moves++;
+
+	}
+
+	cout<<moves<<" "<<alice<<" "<<bob<<endl;
+
+}
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int t;
+    cin>>t;
+    while(t--){
+
+        solve();
+
+    }
+
+    return 0;
+
+} 
