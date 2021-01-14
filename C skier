@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+ 
+ll solve(){
+    
+    string s;
+    cin>>s;
+ 
+    ll x= 0 , y = 0;
+    ll ans = 0;
+ 
+    set<pair<pair<ll,ll>,pair<ll,ll>>> st;
+ 
+    pair<ll,ll> prev = {0,0};
+ 
+    for(int i=0 ; i<s.size() ; i++){
+ 
+        pair<ll,ll> curr = prev;
+ 
+        if(s[i]=='N') curr.second++;
+        else if(s[i]=='S') curr.second--;
+        else if(s[i]=='W') curr.first--;
+        else curr.first++;
+ 
+        if(st.count({curr,prev}) or st.count({prev,curr})) ans+=1;
+        else ans+=5;
+ 
+        st.insert({curr,prev});
+        prev = curr;
+        
+    }
+ 
+    return ans;
+}
+ 
+int main(){
+ 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+ 
+    int t;
+    cin>>t;
+    while(t--)
+        cout<<solve()<<endl;
+ 
+    return 0;
+ 
+} 
