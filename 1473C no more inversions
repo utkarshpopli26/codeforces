@@ -1,0 +1,59 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+int n,k;
+#define vi vector<int>
+#define pb push_back
+
+void solve(){
+    cin>>n>>k;
+
+    // creating array a
+
+    vi a(n+1);
+
+    for(int i=1 ; i<=k ; i++){
+        a[i] = i;
+    }
+
+    int x = k-1;
+
+    for(int i=k+1 ; i<=n ;i++){
+        a[i] = x;
+        x--;
+    }
+
+    vi p(k+1,0);
+    vi ans;
+
+    for(int i=n ; i>=1 ; i--){
+        if(p[a[i]]==1) continue;
+
+        ans.pb(a[i]);
+        p[a[i]]=1;
+    }
+
+    reverse(ans.begin(),ans.end());
+
+    for(auto x: ans)cout<<x<<" ";
+    
+    cout<<endl;
+
+}
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int t;
+    cin>>t;
+    while(t--)
+        solve();
+
+    return 0;
+
+}
