@@ -1,0 +1,57 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+#define vi vector<int>
+
+void solve(){
+    int n;
+    cin>>n;
+
+    vi nums(n,0);
+
+    for(int i=0 ; i<n ;i++)cin>>nums[i];
+
+    vi ans(n,-1);
+
+    vi prime = {2,3,5,7,11,13,17,19,23,29,31};
+
+    int curr_color = 1;
+
+    for(auto p: prime){
+        bool flag = false;
+        for(int i=0 ; i<n ;i++){
+            if(ans[i]!=-1) continue;
+
+            if(nums[i]%p) continue;
+            
+            flag = true;
+            ans[i] = curr_color;
+        }
+
+        if(flag) curr_color++;
+
+    }
+
+    cout<<curr_color-1<<endl;
+
+    for(auto x: ans)cout<<x<<" ";
+    cout<<endl;
+
+}
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int t;
+    cin>>t;
+    while(t--)
+        solve();
+
+    return 0;
+
+}
