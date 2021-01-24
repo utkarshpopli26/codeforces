@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+#define vi vector<int>
+#define pb push_back
+#define fr first
+#define sc second
+#define pi pair<int,int>
+#define all(v) (v).begin(),(v).end()
+#define mk(arr,n,type)  type *arr=new type[n];
+ll gcd(ll a , ll b){
+	if(b==0) return a;
+
+	return gcd(b,a%b);
+}
+
+void cp(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt","r",stdin);
+		freopen("output.txt","w",stdout);
+	#endif
+}
+
+void solve(){
+	vector<pi> pairs;
+
+	int n;
+	cin>>n;
+	for(int i=0 ; i<n ;i++){
+		int l;
+		cin>>l;
+		vi nums(l);
+		for(int i=0 ; i<l ;i++)cin>>nums[i];
+
+		reverse(all(nums));
+
+		if(is_sorted(all(nums))){
+			pairs.pb({nums[0],nums[nums.size()-1]});
+		}
+
+	}
+
+	ll ans = 1ll * n * n;
+
+	sort(all(pairs));
+
+	for(int i=0 ; i<pairs.size() ;i++){
+		ans -= pairs.end() - lower_bound(all(pairs),pi(pairs[i].sc,-1));
+	}
+
+	cout<<ans<<endl;
+	
+}
+
+int main(){
+	cp();
+
+	// int t;
+	// cin>>t;
+
+	// while(t--)
+		solve();
+
+	return 0;
+}
