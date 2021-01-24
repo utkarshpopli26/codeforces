@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+#define vi vector<int>
+#define pb push_back
+#define fr first
+#define sc second
+#define mk(arr,n,type)  type *arr=new type[n];
+
+void cp(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt","r",stdin);
+		freopen("output.txt","w",stdout);
+	#endif
+}
+
+void solve(vector<bool> prime){
+
+	int d;
+	cin>>d;
+
+	ll a,b;
+
+	for(int i=1+d ; i<prime.size() ; i++){
+
+		if(prime[i]){
+			a = i;
+			break;
+		}
+	}
+
+	for(int i=a+d ; i<prime.size() ; i++){
+		if(prime[i]){
+			b = i;
+			break;
+		}
+	}
+	
+	cout<<a*b<<endl;
+}
+
+int main(){
+	cp();
+
+	vector<bool> prime(200001,true);
+
+	prime[0] = prime[1] = false;
+
+	for(int i=2 ; i<=sqrt(200000) ; i++){
+		if(prime[i]){
+
+			for(ll j=i*i ; j<=200000; j+=i){
+				prime[j] = false;
+			}
+
+		}
+	}
+	
+
+	int t;
+	cin>>t;
+
+	while(t--)
+		solve(prime);
+
+	return 0;
+}
