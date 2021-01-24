@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+#define vi vector<int>
+#define pb push_back
+#define fr first
+#define sc second
+#define mk(arr,n,type)  type *arr=new type[n];
+
+void cp(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt","r",stdin);
+		freopen("output.txt","w",stdout);
+	#endif
+}
+
+void solve(){
+		int n;
+		cin >> n;
+		set<int> used;
+		for (int i = 2; i * i <= n; ++i) {
+			if (n % i == 0 && !used.count(i)) {
+				used.insert(i);
+				n /= i;
+				break;
+			}
+		}
+
+
+		for (int i = 2; i * i <= n; ++i) {
+			if (n % i == 0 && !used.count(i)) {
+				used.insert(i);
+				n /= i;
+				break;
+			}
+		}
+
+
+		if (int(used.size()) < 2 || used.count(n) || n == 1) {
+			cout << "NO" << endl;
+		} else {
+			cout << "YES" << endl;
+			used.insert(n);
+			for (auto it : used) cout << it << " ";
+			cout << endl;
+		}
+
+}
+
+int main(){
+	cp();
+
+	int t;
+	cin>>t;
+
+	while(t--)
+		solve();
+
+	return 0;
+}
