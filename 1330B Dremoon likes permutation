@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+#define vi vector<int>
+#define pb push_back
+#define fr first
+#define sc second
+
+void cp(){
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt","r",stdin);
+		freopen("output.txt","w",stdout);
+	#endif
+}
+
+void fast_io(){
+		ios_base::sync_with_stdio(false);
+		cin.tie(NULL);
+		cout.tie(NULL);
+}
+
+bool maximum(vi& nums , int maxi , int n_maxi){
+
+	map<int,int> mp1;
+
+	for(int i=0 ; i<maxi ; i++){
+		mp1[nums[i]]++;
+	}
+
+	for(int i=1 ; i<=maxi ; i++){
+		if(!mp1.count(i)) return false;
+
+		if(mp1[i]>1) return false;
+	}
+
+	map<int,int> mp2;
+
+	for(int i=maxi ; i<nums.size() ; i++){
+
+		mp2[nums[i]]++;
+	}
+
+	for(int i=1 ; i<=n_maxi ; i++){
+		if(!mp2.count(i)) return false;
+
+		if(mp2[i]>1) return false;
+	}
+
+	return true;
+
+}
+
+void solve(){
+	
+	int n;
+	cin>>n;
+
+	vi nums(n,0);
+
+	int maxi = INT_MIN;
+
+	for(int i=0 ; i<n ;i++){
+		cin>>nums[i];
+		maxi = max(maxi , nums[i]);
+	}
+
+	// (1 to max | 1 to n-max) or (1 to n-max | 1 to max)
+	set<pair<int,int>> ans;
+
+	if(maximum(nums,maxi,n-maxi)){
+		ans.insert({maxi,n-maxi});
+	}
+
+	if(maximum(nums,n-maxi,maxi)){
+		ans.insert({n-maxi,maxi});
+	}
+
+	cout<<ans.size()<<endl;
+
+	for(auto x: ans)cout<<x.first<<" "<<x.second<<endl;
+
+}
+
+int main(){
+	cp();
+	fast_io();
+
+	int t;
+	cin>>t;
+
+	while(t--)
+		solve();
+
+	return 0;
+}
