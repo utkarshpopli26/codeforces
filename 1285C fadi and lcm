@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int mod = 1e9+7;
+#define vi vector<int>
+#define pb push_back
+#define fr first
+#define sc second
+#define mk(arr,n,type)  type *arr=new type[n];
+
+void cp(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt","r",stdin);
+		freopen("output.txt","w",stdout);
+	#endif
+}
+
+ll gcd(ll a , ll b){
+	if(b==0) return a;
+
+	return gcd(b,a%b);
+}
+
+void solve(){
+	ll x;
+	cin>>x;
+
+	for(int i=sqrt(x) ; i>=1 ; i--){
+		if(x%i==0){
+			ll lcm = (i*(x/i))/gcd(i,x/i);
+			if(lcm==x){
+				cout<<i<<" "<<x/i<<endl;
+				return ;
+			}
+		}
+	}
+
+}
+
+int main(){
+	cp();
+
+	// int t;
+	// cin>>t;
+
+	// while(t--)
+		solve();
+
+	return 0;
+}
